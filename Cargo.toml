@@ -1,0 +1,23 @@
+[package]
+name = "grpc_tensorflow"
+version = "0.1.0"
+authors = ["Venkata Ramana <arjunchitturi@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+#
+[lib]
+name = "tensorflowlib"
+path = "tensorflow/tensorflow_serving.rs"
+
+[dependencies]
+tonic = "0.3.1"
+prost = "0.6.1"
+#tokio = "0.3.4"
+tokio = { version = "0.2.2", features=["full"] }
+protobuf = "2.18.1"
+prost-types = "0.6.1"
+rand = "0.7.3"
+
+[build-dependencies]
+tonic-build = "0.3.1"
