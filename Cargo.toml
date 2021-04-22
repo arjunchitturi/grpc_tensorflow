@@ -11,13 +11,13 @@ name = "tensorflowlib"
 path = "tensorflow/tensorflow_serving.rs"
 
 [dependencies]
-tonic = "0.3.1"
-prost = "0.6.1"
+tonic = "0.4.2"
+prost = "0.7.0"
 #tokio = "0.3.4"
-tokio = { version = "0.2.2", features=["full"] }
-protobuf = "2.18.1"
-prost-types = "0.6.1"
-rand = "0.7.3"
+tokio = { version = "1.5.0", features = ["full"] }
+protobuf = "2.22.1"
+prost-types = "0.7.0"
+rand = "0.8.3"
 
 [build-dependencies]
-tonic-build = "0.3.1"
+tonic-build = "0.4.2"

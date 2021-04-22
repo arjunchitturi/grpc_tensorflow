@@ -1,26 +1,27 @@
 /// Containers to hold repeated fundamental values.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BytesList {
-    #[prost(bytes, repeated, tag = "1")]
-    pub value: ::std::vec::Vec<std::vec::Vec<u8>>,
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub value: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FloatList {
     #[prost(float, repeated, tag = "1")]
-    pub value: ::std::vec::Vec<f32>,
+    pub value: ::prost::alloc::vec::Vec<f32>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Int64List {
     #[prost(int64, repeated, tag = "1")]
-    pub value: ::std::vec::Vec<i64>,
+    pub value: ::prost::alloc::vec::Vec<i64>,
 }
 /// Containers for non-sequential data.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Feature {
     /// Each feature can be exactly one kind.
     #[prost(oneof = "feature::Kind", tags = "1, 2, 3")]
-    pub kind: ::std::option::Option<feature::Kind>,
+    pub kind: ::core::option::Option<feature::Kind>,
 }
+/// Nested message and enum types in `Feature`.
 pub mod feature {
     /// Each feature can be exactly one kind.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -37,7 +38,7 @@ pub mod feature {
 pub struct Features {
     /// Map from feature name to feature.
     #[prost(map = "string, message", tag = "1")]
-    pub feature: ::std::collections::HashMap<std::string::String, Feature>,
+    pub feature: ::std::collections::HashMap<::prost::alloc::string::String, Feature>,
 }
 /// Containers for sequential data.
 ///
@@ -50,13 +51,13 @@ pub struct Features {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeatureList {
     #[prost(message, repeated, tag = "1")]
-    pub feature: ::std::vec::Vec<Feature>,
+    pub feature: ::prost::alloc::vec::Vec<Feature>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeatureLists {
     /// Map from feature name to feature list.
     #[prost(map = "string, message", tag = "1")]
-    pub feature_list: ::std::collections::HashMap<std::string::String, FeatureList>,
+    pub feature_list: ::std::collections::HashMap<::prost::alloc::string::String, FeatureList>,
 }
 // An Example is a mostly-normalized data format for storing data for
 // training and inference.  It contains a key-value store (features); where
@@ -136,7 +137,7 @@ pub struct FeatureLists {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Example {
     #[prost(message, optional, tag = "1")]
-    pub features: ::std::option::Option<Features>,
+    pub features: ::core::option::Option<Features>,
 }
 // A SequenceExample is an Example representing one or more sequences, and
 // some context.  The context contains features which apply to the entire
@@ -347,9 +348,9 @@ pub struct Example {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SequenceExample {
     #[prost(message, optional, tag = "1")]
-    pub context: ::std::option::Option<Features>,
+    pub context: ::core::option::Option<Features>,
     #[prost(message, optional, tag = "2")]
-    pub feature_lists: ::std::option::Option<FeatureLists>,
+    pub feature_lists: ::core::option::Option<FeatureLists>,
 }
 /// Dimensions of a tensor.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -368,13 +369,14 @@ pub struct TensorShapeProto {
     ///
     /// If "dim.size()" > 0, "unknown_rank" must be false.
     #[prost(message, repeated, tag = "2")]
-    pub dim: ::std::vec::Vec<tensor_shape_proto::Dim>,
+    pub dim: ::prost::alloc::vec::Vec<tensor_shape_proto::Dim>,
     /// If true, the number of dimensions in the shape is unknown.
     ///
     /// If true, "dim.size()" must be 0.
     #[prost(bool, tag = "3")]
     pub unknown_rank: bool,
 }
+/// Nested message and enum types in `TensorShapeProto`.
 pub mod tensor_shape_proto {
     /// One dimension of the tensor.
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -388,7 +390,7 @@ pub mod tensor_shape_proto {
         pub size: i64,
         /// Optional name of the tensor dimension.
         #[prost(string, tag = "2")]
-        pub name: std::string::String,
+        pub name: ::prost::alloc::string::String,
     }
 }
 /// (== suppress_warning documentation-presence ==)
@@ -466,13 +468,13 @@ pub enum DataType {
 pub struct ResourceHandleProto {
     /// Unique name for the device containing the resource.
     #[prost(string, tag = "1")]
-    pub device: std::string::String,
+    pub device: ::prost::alloc::string::String,
     /// Container in which this resource is placed.
     #[prost(string, tag = "2")]
-    pub container: std::string::String,
+    pub container: ::prost::alloc::string::String,
     /// Unique name of this resource.
     #[prost(string, tag = "3")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     /// Hash code for the type of the resource. Is only valid in the same device
     /// and in the same execution.
     #[prost(uint64, tag = "4")]
@@ -480,11 +482,12 @@ pub struct ResourceHandleProto {
     /// For debug-only, the name of the type pointed to by this handle, if
     /// available.
     #[prost(string, tag = "5")]
-    pub maybe_type_name: std::string::String,
+    pub maybe_type_name: ::prost::alloc::string::String,
     /// Data types and shapes for the underlying resource.
     #[prost(message, repeated, tag = "6")]
-    pub dtypes_and_shapes: ::std::vec::Vec<resource_handle_proto::DtypeAndShape>,
+    pub dtypes_and_shapes: ::prost::alloc::vec::Vec<resource_handle_proto::DtypeAndShape>,
 }
+/// Nested message and enum types in `ResourceHandleProto`.
 pub mod resource_handle_proto {
     /// Protocol buffer representing a pair of (data type, tensor shape).
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -492,7 +495,7 @@ pub mod resource_handle_proto {
         #[prost(enumeration = "super::DataType", tag = "1")]
         pub dtype: i32,
         #[prost(message, optional, tag = "2")]
-        pub shape: ::std::option::Option<super::TensorShapeProto>,
+        pub shape: ::core::option::Option<super::TensorShapeProto>,
     }
 }
 /// Protocol buffer representing a tensor.
@@ -502,7 +505,7 @@ pub struct TensorProto {
     pub dtype: i32,
     /// Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
     #[prost(message, optional, tag = "2")]
-    pub tensor_shape: ::std::option::Option<TensorShapeProto>,
+    pub tensor_shape: ::core::option::Option<TensorShapeProto>,
     // Only one of the representations below is set, one of "tensor_contents" and
     // the "xxx_val" attributes.  We are not using oneof because as oneofs cannot
     // contain repeated fields it would require another extra set of messages.
@@ -518,8 +521,8 @@ pub struct TensorProto {
     /// can be used for all tensor types. The purpose of this representation is to
     /// reduce serialization overhead during RPC call by avoiding serialization of
     /// many repeated small items.
-    #[prost(bytes, tag = "4")]
-    pub tensor_content: std::vec::Vec<u8>,
+    #[prost(bytes = "vec", tag = "4")]
+    pub tensor_content: ::prost::alloc::vec::Vec<u8>,
     // Type specific representations that make it easy to create tensor protos in
     // all languages.  Only the representation corresponding to "dtype" can
     // be set.  The values hold the flattened representation of the tensor in
@@ -527,58 +530,58 @@ pub struct TensorProto {
     /// DT_HALF, DT_BFLOAT16. Note that since protobuf has no int16 type, we'll
     /// have some pointless zero padding for each value here.
     #[prost(int32, repeated, tag = "13")]
-    pub half_val: ::std::vec::Vec<i32>,
+    pub half_val: ::prost::alloc::vec::Vec<i32>,
     /// DT_FLOAT.
     #[prost(float, repeated, tag = "5")]
-    pub float_val: ::std::vec::Vec<f32>,
+    pub float_val: ::prost::alloc::vec::Vec<f32>,
     /// DT_DOUBLE.
     #[prost(double, repeated, tag = "6")]
-    pub double_val: ::std::vec::Vec<f64>,
+    pub double_val: ::prost::alloc::vec::Vec<f64>,
     /// DT_INT32, DT_INT16, DT_INT8, DT_UINT8.
     #[prost(int32, repeated, tag = "7")]
-    pub int_val: ::std::vec::Vec<i32>,
+    pub int_val: ::prost::alloc::vec::Vec<i32>,
     /// DT_STRING
-    #[prost(bytes, repeated, tag = "8")]
-    pub string_val: ::std::vec::Vec<std::vec::Vec<u8>>,
+    #[prost(bytes = "vec", repeated, tag = "8")]
+    pub string_val: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
     /// DT_COMPLEX64. scomplex_val(2*i) and scomplex_val(2*i+1) are real
     /// and imaginary parts of i-th single precision complex.
     #[prost(float, repeated, tag = "9")]
-    pub scomplex_val: ::std::vec::Vec<f32>,
+    pub scomplex_val: ::prost::alloc::vec::Vec<f32>,
     /// DT_INT64
     #[prost(int64, repeated, tag = "10")]
-    pub int64_val: ::std::vec::Vec<i64>,
+    pub int64_val: ::prost::alloc::vec::Vec<i64>,
     /// DT_BOOL
     #[prost(bool, repeated, tag = "11")]
-    pub bool_val: ::std::vec::Vec<bool>,
+    pub bool_val: ::prost::alloc::vec::Vec<bool>,
     /// DT_COMPLEX128. dcomplex_val(2*i) and dcomplex_val(2*i+1) are real
     /// and imaginary parts of i-th double precision complex.
     #[prost(double, repeated, tag = "12")]
-    pub dcomplex_val: ::std::vec::Vec<f64>,
+    pub dcomplex_val: ::prost::alloc::vec::Vec<f64>,
     /// DT_RESOURCE
     #[prost(message, repeated, tag = "14")]
-    pub resource_handle_val: ::std::vec::Vec<ResourceHandleProto>,
+    pub resource_handle_val: ::prost::alloc::vec::Vec<ResourceHandleProto>,
     /// DT_VARIANT
     #[prost(message, repeated, tag = "15")]
-    pub variant_val: ::std::vec::Vec<VariantTensorDataProto>,
+    pub variant_val: ::prost::alloc::vec::Vec<VariantTensorDataProto>,
     /// DT_UINT32
     #[prost(uint32, repeated, tag = "16")]
-    pub uint32_val: ::std::vec::Vec<u32>,
+    pub uint32_val: ::prost::alloc::vec::Vec<u32>,
     /// DT_UINT64
     #[prost(uint64, repeated, tag = "17")]
-    pub uint64_val: ::std::vec::Vec<u64>,
+    pub uint64_val: ::prost::alloc::vec::Vec<u64>,
 }
 /// Protocol buffer representing the serialization format of DT_VARIANT tensors.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantTensorDataProto {
     /// Name of the type of objects being serialized.
     #[prost(string, tag = "1")]
-    pub type_name: std::string::String,
+    pub type_name: ::prost::alloc::string::String,
     /// Portions of the object that are not Tensors.
-    #[prost(bytes, tag = "2")]
-    pub metadata: std::vec::Vec<u8>,
+    #[prost(bytes = "vec", tag = "2")]
+    pub metadata: ::prost::alloc::vec::Vec<u8>,
     /// Tensors contained within objects being serialized.
     #[prost(message, repeated, tag = "3")]
-    pub tensors: ::std::vec::Vec<TensorProto>,
+    pub tensors: ::prost::alloc::vec::Vec<TensorProto>,
 }
 /// Protocol buffer representing the value for an attr used to configure an Op.
 /// Comment indicates the corresponding attr type.  Only the field matching the
@@ -586,42 +589,43 @@ pub struct VariantTensorDataProto {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AttrValue {
     #[prost(oneof = "attr_value::Value", tags = "2, 3, 4, 5, 6, 7, 8, 1, 10, 9")]
-    pub value: ::std::option::Option<attr_value::Value>,
+    pub value: ::core::option::Option<attr_value::Value>,
 }
+/// Nested message and enum types in `AttrValue`.
 pub mod attr_value {
     /// LINT.IfChange
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ListValue {
         /// "list(string)"
-        #[prost(bytes, repeated, tag = "2")]
-        pub s: ::std::vec::Vec<std::vec::Vec<u8>>,
+        #[prost(bytes = "vec", repeated, tag = "2")]
+        pub s: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
         /// "list(int)"
         #[prost(int64, repeated, tag = "3")]
-        pub i: ::std::vec::Vec<i64>,
+        pub i: ::prost::alloc::vec::Vec<i64>,
         /// "list(float)"
         #[prost(float, repeated, tag = "4")]
-        pub f: ::std::vec::Vec<f32>,
+        pub f: ::prost::alloc::vec::Vec<f32>,
         /// "list(bool)"
         #[prost(bool, repeated, tag = "5")]
-        pub b: ::std::vec::Vec<bool>,
+        pub b: ::prost::alloc::vec::Vec<bool>,
         /// "list(type)"
         #[prost(enumeration = "super::DataType", repeated, tag = "6")]
-        pub r#type: ::std::vec::Vec<i32>,
+        pub r#type: ::prost::alloc::vec::Vec<i32>,
         /// "list(shape)"
         #[prost(message, repeated, tag = "7")]
-        pub shape: ::std::vec::Vec<super::TensorShapeProto>,
+        pub shape: ::prost::alloc::vec::Vec<super::TensorShapeProto>,
         /// "list(tensor)"
         #[prost(message, repeated, tag = "8")]
-        pub tensor: ::std::vec::Vec<super::TensorProto>,
+        pub tensor: ::prost::alloc::vec::Vec<super::TensorProto>,
         /// "list(attr)"
         #[prost(message, repeated, tag = "9")]
-        pub func: ::std::vec::Vec<super::NameAttrList>,
+        pub func: ::prost::alloc::vec::Vec<super::NameAttrList>,
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         /// "string"
         #[prost(bytes, tag = "2")]
-        S(std::vec::Vec<u8>),
+        S(::prost::alloc::vec::Vec<u8>),
         /// "int"
         #[prost(int64, tag = "3")]
         I(i64),
@@ -657,7 +661,7 @@ pub mod attr_value {
         /// set to "bar", the instantiated node N's attr A will have been
         /// given the value "bar".
         #[prost(string, tag = "9")]
-        Placeholder(std::string::String),
+        Placeholder(::prost::alloc::string::String),
     }
 }
 /// A list of attr names and their values. The whole list is attached
@@ -665,9 +669,9 @@ pub mod attr_value {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NameAttrList {
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     #[prost(map = "string, message", tag = "2")]
-    pub attr: ::std::collections::HashMap<std::string::String, AttrValue>,
+    pub attr: ::std::collections::HashMap<::prost::alloc::string::String, AttrValue>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeDef {
@@ -675,18 +679,18 @@ pub struct NodeDef {
     /// logging, visualization, etc.  Unique within a single GraphDef.
     /// Must match the regexp "[A-Za-z0-9.][A-Za-z0-9_>./]*".
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     /// The operation name.  There may be custom parameters in attrs.
     /// Op names starting with an underscore are reserved for internal use.
     #[prost(string, tag = "2")]
-    pub op: std::string::String,
+    pub op: ::prost::alloc::string::String,
     /// Each input is "node:src_output" with "node" being a string name and
     /// "src_output" indicating which output tensor to use from "node". If
     /// "src_output" is 0 the ":0" suffix can be omitted.  Regular inputs
     /// may optionally be followed by control inputs that have the format
     /// "^node".
     #[prost(string, repeated, tag = "3")]
-    pub input: ::std::vec::Vec<std::string::String>,
+    pub input: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// A (possibly partial) specification for the device on which this
     /// node should be placed.
     /// The expected syntax for this string is as follows:
@@ -708,7 +712,7 @@ pub struct NodeDef {
     /// field is empty or not present), the runtime will attempt to
     /// choose a device automatically.
     #[prost(string, tag = "4")]
-    pub device: std::string::String,
+    pub device: ::prost::alloc::string::String,
     /// Operation-specific graph-construction-time configuration.
     /// Note that this should include all attrs defined in the
     /// corresponding OpDef, including those with a value matching
@@ -722,11 +726,12 @@ pub struct NodeDef {
     /// attr's type field.
     /// TODO(josh11b): Add some examples here showing best practices.
     #[prost(map = "string, message", tag = "5")]
-    pub attr: ::std::collections::HashMap<std::string::String, AttrValue>,
+    pub attr: ::std::collections::HashMap<::prost::alloc::string::String, AttrValue>,
     /// This stores debug information associated with the node.
     #[prost(message, optional, tag = "6")]
-    pub experimental_debug_info: ::std::option::Option<node_def::ExperimentalDebugInfo>,
+    pub experimental_debug_info: ::core::option::Option<node_def::ExperimentalDebugInfo>,
 }
+/// Nested message and enum types in `NodeDef`.
 pub mod node_def {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ExperimentalDebugInfo {
@@ -738,7 +743,7 @@ pub mod node_def {
         /// be {A, B}. This information can be used to map errors originating at the
         /// current node to some top level source code.
         #[prost(string, repeated, tag = "1")]
-        pub original_node_names: ::std::vec::Vec<std::string::String>,
+        pub original_node_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         /// This is intended to store the list of names of the functions from the
         /// original graph that this node was derived. For example if this node, say
         /// C, was result of a fusion of node A in function FA and node B in function
@@ -747,7 +752,7 @@ pub mod node_def {
         /// `original_node_names` can be used to map errors originating at the
         /// current ndoe to some top level source code.
         #[prost(string, repeated, tag = "2")]
-        pub original_func_names: ::std::vec::Vec<std::string::String>,
+        pub original_func_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
 }
 /// Defines an operation. A NodeDef in a GraphDef specifies an Op by
@@ -758,28 +763,28 @@ pub struct OpDef {
     /// Op names starting with an underscore are reserved for internal use.
     /// Names should be CamelCase and match the regexp "[A-Z][a-zA-Z0-9>_]*".
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     /// Description of the input(s).
     #[prost(message, repeated, tag = "2")]
-    pub input_arg: ::std::vec::Vec<op_def::ArgDef>,
+    pub input_arg: ::prost::alloc::vec::Vec<op_def::ArgDef>,
     /// Description of the output(s).
     #[prost(message, repeated, tag = "3")]
-    pub output_arg: ::std::vec::Vec<op_def::ArgDef>,
+    pub output_arg: ::prost::alloc::vec::Vec<op_def::ArgDef>,
     /// Named control outputs for this operation. Useful only for composite
     /// operations (i.e. functions) which want to name different control outputs.
     #[prost(string, repeated, tag = "20")]
-    pub control_output: ::std::vec::Vec<std::string::String>,
+    pub control_output: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, repeated, tag = "4")]
-    pub attr: ::std::vec::Vec<op_def::AttrDef>,
+    pub attr: ::prost::alloc::vec::Vec<op_def::AttrDef>,
     /// Optional deprecation based on GraphDef versions.
     #[prost(message, optional, tag = "8")]
-    pub deprecation: ::std::option::Option<OpDeprecation>,
+    pub deprecation: ::core::option::Option<OpDeprecation>,
     /// One-line human-readable description of what the Op does.
     #[prost(string, tag = "5")]
-    pub summary: std::string::String,
+    pub summary: ::prost::alloc::string::String,
     /// Additional, longer human-readable description of what the Op does.
     #[prost(string, tag = "6")]
-    pub description: std::string::String,
+    pub description: ::prost::alloc::string::String,
     // -------------------------------------------------------------------------
     // Which optimizations this operation can participate in.
     /// True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
@@ -828,16 +833,17 @@ pub struct OpDef {
     #[prost(bool, tag = "19")]
     pub allows_uninitialized_input: bool,
 }
+/// Nested message and enum types in `OpDef`.
 pub mod op_def {
     /// For describing inputs and outputs.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ArgDef {
         /// Name for the input/output.  Should match the regexp "[a-z][a-z0-9_]*".
         #[prost(string, tag = "1")]
-        pub name: std::string::String,
+        pub name: ::prost::alloc::string::String,
         /// Human readable description.
         #[prost(string, tag = "2")]
-        pub description: std::string::String,
+        pub description: ::prost::alloc::string::String,
         /// Describes the type of one or more tensors that are accepted/produced
         /// by this input/output arg.  The only legal combinations are:
         /// * For a single tensor: either the "type" field is set or the
@@ -852,14 +858,14 @@ pub mod op_def {
         pub r#type: i32,
         /// if specified, attr must have type "type"
         #[prost(string, tag = "4")]
-        pub type_attr: std::string::String,
+        pub type_attr: ::prost::alloc::string::String,
         /// if specified, attr must have type "int"
         #[prost(string, tag = "5")]
-        pub number_attr: std::string::String,
+        pub number_attr: ::prost::alloc::string::String,
         /// If specified, attr must have type "list(type)", and none of
         /// type, type_attr, and number_attr may be specified.
         #[prost(string, tag = "6")]
-        pub type_list_attr: std::string::String,
+        pub type_list_attr: ::prost::alloc::string::String,
         /// For inputs: if true, the inputs are required to be refs.
         ///   By default, inputs can be either refs or non-refs.
         /// For outputs: if true, outputs are refs, otherwise they are not.
@@ -875,18 +881,18 @@ pub mod op_def {
         /// Python client, as a keyword argument name, and so should match
         /// the regexp "[a-z][a-z0-9_]+".
         #[prost(string, tag = "1")]
-        pub name: std::string::String,
+        pub name: ::prost::alloc::string::String,
         /// One of the type names from attr_value.proto ("string", "list(string)",
         /// "int", etc.).
         #[prost(string, tag = "2")]
-        pub r#type: std::string::String,
+        pub r#type: ::prost::alloc::string::String,
         /// A reasonable default for this attribute if the user does not supply
         /// a value.  If not specified, the user must supply a value.
         #[prost(message, optional, tag = "3")]
-        pub default_value: ::std::option::Option<super::AttrValue>,
+        pub default_value: ::core::option::Option<super::AttrValue>,
         /// Human-readable description.
         #[prost(string, tag = "4")]
-        pub description: std::string::String,
+        pub description: ::prost::alloc::string::String,
         // TODO(josh11b): bool is_optional?
 
         // --- Constraints ---
@@ -905,7 +911,7 @@ pub mod op_def {
         /// If type == "string" or "list(string)", then the "s" field of
         /// "allowed_values.list" has the set of allowed strings.
         #[prost(message, optional, tag = "7")]
-        pub allowed_values: ::std::option::Option<super::AttrValue>,
+        pub allowed_values: ::core::option::Option<super::AttrValue>,
     }
 }
 /// Information about version-dependent deprecation of an op
@@ -916,21 +922,21 @@ pub struct OpDeprecation {
     pub version: i32,
     /// Explanation of why it was deprecated and what to use instead.
     #[prost(string, tag = "2")]
-    pub explanation: std::string::String,
+    pub explanation: ::prost::alloc::string::String,
 }
 /// A collection of OpDefs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpList {
     #[prost(message, repeated, tag = "1")]
-    pub op: ::std::vec::Vec<OpDef>,
+    pub op: ::prost::alloc::vec::Vec<OpDef>,
 }
 /// A library is a set of named functions.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionDefLibrary {
     #[prost(message, repeated, tag = "1")]
-    pub function: ::std::vec::Vec<FunctionDef>,
+    pub function: ::prost::alloc::vec::Vec<FunctionDef>,
     #[prost(message, repeated, tag = "2")]
-    pub gradient: ::std::vec::Vec<GradientDef>,
+    pub gradient: ::prost::alloc::vec::Vec<GradientDef>,
 }
 /// A function can be instantiated when the runtime can bind every attr
 /// with a value. When a GraphDef has a call to a function, it must
@@ -943,10 +949,10 @@ pub struct FunctionDef {
     /// The definition of the function's name, arguments, return values,
     /// attrs etc.
     #[prost(message, optional, tag = "1")]
-    pub signature: ::std::option::Option<OpDef>,
+    pub signature: ::core::option::Option<OpDef>,
     /// Attributes specific to this function definition.
     #[prost(map = "string, message", tag = "5")]
-    pub attr: ::std::collections::HashMap<std::string::String, AttrValue>,
+    pub attr: ::std::collections::HashMap<::prost::alloc::string::String, AttrValue>,
     #[prost(map = "uint32, message", tag = "7")]
     pub arg_attr: ::std::collections::HashMap<u32, function_def::ArgAttrs>,
     /// Unique IDs for each resource argument, used to track aliasing resources. If
@@ -998,23 +1004,26 @@ pub struct FunctionDef {
     /// user-defined library first. If not resolved, "func" is assumed to
     /// be a builtin op.
     #[prost(message, repeated, tag = "3")]
-    pub node_def: ::std::vec::Vec<NodeDef>,
+    pub node_def: ::prost::alloc::vec::Vec<NodeDef>,
     /// A mapping from the output arg names from `signature` to the
     /// outputs from `node_def` that should be returned by the function.
     #[prost(map = "string, string", tag = "4")]
-    pub ret: ::std::collections::HashMap<std::string::String, std::string::String>,
+    pub ret:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// A mapping from control output names from `signature` to node names in
     /// `node_def` which should be control outputs of this function.
     #[prost(map = "string, string", tag = "6")]
-    pub control_ret: ::std::collections::HashMap<std::string::String, std::string::String>,
+    pub control_ret:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
+/// Nested message and enum types in `FunctionDef`.
 pub mod function_def {
     /// Attributes for function arguments. These attributes are the same set of
     /// valid attributes as to _Arg nodes.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ArgAttrs {
         #[prost(map = "string, message", tag = "1")]
-        pub attr: ::std::collections::HashMap<std::string::String, super::AttrValue>,
+        pub attr: ::std::collections::HashMap<::prost::alloc::string::String, super::AttrValue>,
     }
 }
 /// GradientDef defines the gradient function of a function defined in
@@ -1039,10 +1048,10 @@ pub mod function_def {
 pub struct GradientDef {
     /// The function name.
     #[prost(string, tag = "1")]
-    pub function_name: std::string::String,
+    pub function_name: ::prost::alloc::string::String,
     /// The gradient function's name.
     #[prost(string, tag = "2")]
-    pub gradient_func: std::string::String,
+    pub gradient_func: ::prost::alloc::string::String,
 }
 /// Version information for a piece of serialized data
 ///
@@ -1067,21 +1076,22 @@ pub struct VersionDef {
     pub min_consumer: i32,
     /// Specific consumer versions which are disallowed (e.g. due to bugs).
     #[prost(int32, repeated, tag = "3")]
-    pub bad_consumers: ::std::vec::Vec<i32>,
+    pub bad_consumers: ::prost::alloc::vec::Vec<i32>,
 }
 /// Represents the graph of operations
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GraphDef {
     #[prost(message, repeated, tag = "1")]
-    pub node: ::std::vec::Vec<NodeDef>,
+    pub node: ::prost::alloc::vec::Vec<NodeDef>,
     /// Compatibility versions of the graph.  See core/public/version.h for version
     /// history.  The GraphDef version is distinct from the TensorFlow version, and
     /// each release of TensorFlow will support a range of GraphDef versions.
     #[prost(message, optional, tag = "4")]
-    pub versions: ::std::option::Option<VersionDef>,
+    pub versions: ::core::option::Option<VersionDef>,
     /// Deprecated single version field; use versions above instead.  Since all
     /// GraphDef changes before "versions" was introduced were forward
     /// compatible, this field is entirely ignored.
+    #[deprecated]
     #[prost(int32, tag = "3")]
     pub version: i32,
     /// EXPERIMENTAL. DO NOT USE OR DEPEND ON THIS YET.
@@ -1113,26 +1123,26 @@ pub struct GraphDef {
     ///     consumer does not start until all return values of the callee
     ///     function are ready.
     #[prost(message, optional, tag = "2")]
-    pub library: ::std::option::Option<FunctionDefLibrary>,
+    pub library: ::core::option::Option<FunctionDefLibrary>,
 }
 /// Protocol buffer representing a Variable.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariableDef {
     /// Name of the variable tensor.
     #[prost(string, tag = "1")]
-    pub variable_name: std::string::String,
+    pub variable_name: ::prost::alloc::string::String,
     /// Name of the tensor holding the variable's initial value.
     #[prost(string, tag = "6")]
-    pub initial_value_name: std::string::String,
+    pub initial_value_name: ::prost::alloc::string::String,
     /// Name of the initializer op.
     #[prost(string, tag = "2")]
-    pub initializer_name: std::string::String,
+    pub initializer_name: ::prost::alloc::string::String,
     /// Name of the snapshot tensor.
     #[prost(string, tag = "3")]
-    pub snapshot_name: std::string::String,
+    pub snapshot_name: ::prost::alloc::string::String,
     /// Support for saving variables as slices of a larger variable.
     #[prost(message, optional, tag = "4")]
-    pub save_slice_info_def: ::std::option::Option<SaveSliceInfoDef>,
+    pub save_slice_info_def: ::core::option::Option<SaveSliceInfoDef>,
     /// Whether to represent this as a ResourceVariable.
     #[prost(bool, tag = "5")]
     pub is_resource: bool,
@@ -1150,16 +1160,16 @@ pub struct VariableDef {
 pub struct SaveSliceInfoDef {
     /// Name of the full variable of which this is a slice.
     #[prost(string, tag = "1")]
-    pub full_name: std::string::String,
+    pub full_name: ::prost::alloc::string::String,
     /// Shape of the full variable.
     #[prost(int64, repeated, tag = "2")]
-    pub full_shape: ::std::vec::Vec<i64>,
+    pub full_shape: ::prost::alloc::vec::Vec<i64>,
     /// Offset of this variable into the full variable.
     #[prost(int64, repeated, tag = "3")]
-    pub var_offset: ::std::vec::Vec<i64>,
+    pub var_offset: ::prost::alloc::vec::Vec<i64>,
     /// Shape of this variable.
     #[prost(int64, repeated, tag = "4")]
-    pub var_shape: ::std::vec::Vec<i64>,
+    pub var_shape: ::prost::alloc::vec::Vec<i64>,
 }
 /// Indicates when a distributed variable will be synced.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1228,8 +1238,9 @@ pub struct StructuredValue {
         oneof = "structured_value::Kind",
         tags = "1, 11, 12, 13, 14, 31, 32, 33, 34, 35, 51, 52, 53, 54"
     )]
-    pub kind: ::std::option::Option<structured_value::Kind>,
+    pub kind: ::core::option::Option<structured_value::Kind>,
 }
+/// Nested message and enum types in `StructuredValue`.
 pub mod structured_value {
     /// The kind of value.
     #[derive(Clone, PartialEq, ::prost::Oneof)]
@@ -1251,7 +1262,7 @@ pub mod structured_value {
         /// there is effectively no difference between the language versions.
         /// The obsolescent `unicode` type of Python 2 is not supported here.
         #[prost(string, tag = "13")]
-        StringValue(std::string::String),
+        StringValue(::prost::alloc::string::String),
         /// Represents a boolean value.
         #[prost(bool, tag = "14")]
         BoolValue(bool),
@@ -1266,7 +1277,7 @@ pub mod structured_value {
         TensorSpecValue(super::TensorSpecProto),
         /// Represents a value for tf.TypeSpec.
         #[prost(message, tag = "34")]
-        TypeSpecValue(Box<super::TypeSpecProto>),
+        TypeSpecValue(::prost::alloc::boxed::Box<super::TypeSpecProto>),
         /// Represents a value for tf.BoundedTensorSpec.
         #[prost(message, tag = "35")]
         BoundedTensorSpecValue(super::BoundedTensorSpecProto),
@@ -1291,44 +1302,44 @@ pub struct NoneValue {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListValue {
     #[prost(message, repeated, tag = "1")]
-    pub values: ::std::vec::Vec<StructuredValue>,
+    pub values: ::prost::alloc::vec::Vec<StructuredValue>,
 }
 /// Represents a Python tuple.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TupleValue {
     #[prost(message, repeated, tag = "1")]
-    pub values: ::std::vec::Vec<StructuredValue>,
+    pub values: ::prost::alloc::vec::Vec<StructuredValue>,
 }
 /// Represents a Python dict keyed by `str`.
 /// The comment on Unicode from Value.string_value applies analogously.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DictValue {
     #[prost(map = "string, message", tag = "1")]
-    pub fields: ::std::collections::HashMap<std::string::String, StructuredValue>,
+    pub fields: ::std::collections::HashMap<::prost::alloc::string::String, StructuredValue>,
 }
 /// Represents a (key, value) pair.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PairValue {
     #[prost(string, tag = "1")]
-    pub key: std::string::String,
+    pub key: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
-    pub value: ::std::option::Option<StructuredValue>,
+    pub value: ::core::option::Option<StructuredValue>,
 }
 /// Represents Python's namedtuple.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NamedTupleValue {
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     #[prost(message, repeated, tag = "2")]
-    pub values: ::std::vec::Vec<PairValue>,
+    pub values: ::prost::alloc::vec::Vec<PairValue>,
 }
 /// A protobuf to represent tf.TensorSpec.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TensorSpecProto {
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
-    pub shape: ::std::option::Option<TensorShapeProto>,
+    pub shape: ::core::option::Option<TensorShapeProto>,
     #[prost(enumeration = "DataType", tag = "3")]
     pub dtype: i32,
 }
@@ -1336,15 +1347,15 @@ pub struct TensorSpecProto {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BoundedTensorSpecProto {
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
-    pub shape: ::std::option::Option<TensorShapeProto>,
+    pub shape: ::core::option::Option<TensorShapeProto>,
     #[prost(enumeration = "DataType", tag = "3")]
     pub dtype: i32,
     #[prost(message, optional, tag = "4")]
-    pub minimum: ::std::option::Option<TensorProto>,
+    pub minimum: ::core::option::Option<TensorProto>,
     #[prost(message, optional, tag = "5")]
-    pub maximum: ::std::option::Option<TensorProto>,
+    pub maximum: ::core::option::Option<TensorProto>,
 }
 /// Represents a tf.TypeSpec
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1353,14 +1364,15 @@ pub struct TypeSpecProto {
     pub type_spec_class: i32,
     /// The value returned by TypeSpec._serialize().
     #[prost(message, optional, boxed, tag = "2")]
-    pub type_state: ::std::option::Option<::std::boxed::Box<StructuredValue>>,
+    pub type_state: ::core::option::Option<::prost::alloc::boxed::Box<StructuredValue>>,
     /// This is currently redundant with the type_spec_class enum, and is only
     /// used for error reporting.  In particular, if you use an older binary to
     /// load a newer model, and the model uses a TypeSpecClass that the older
     /// binary doesn't support, then this lets us display a useful error message.
     #[prost(string, tag = "3")]
-    pub type_spec_class_name: std::string::String,
+    pub type_spec_class_name: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `TypeSpecProto`.
 pub mod type_spec_proto {
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
@@ -1395,21 +1407,23 @@ pub mod type_spec_proto {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TrackableObjectGraph {
     #[prost(message, repeated, tag = "1")]
-    pub nodes: ::std::vec::Vec<trackable_object_graph::TrackableObject>,
+    pub nodes: ::prost::alloc::vec::Vec<trackable_object_graph::TrackableObject>,
 }
+/// Nested message and enum types in `TrackableObjectGraph`.
 pub mod trackable_object_graph {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TrackableObject {
         /// Objects which this object depends on.
         #[prost(message, repeated, tag = "1")]
-        pub children: ::std::vec::Vec<trackable_object::ObjectReference>,
+        pub children: ::prost::alloc::vec::Vec<trackable_object::ObjectReference>,
         /// Serialized data specific to this object.
         #[prost(message, repeated, tag = "2")]
-        pub attributes: ::std::vec::Vec<trackable_object::SerializedTensor>,
+        pub attributes: ::prost::alloc::vec::Vec<trackable_object::SerializedTensor>,
         /// Slot variables owned by this object.
         #[prost(message, repeated, tag = "3")]
-        pub slot_variables: ::std::vec::Vec<trackable_object::SlotVariableReference>,
+        pub slot_variables: ::prost::alloc::vec::Vec<trackable_object::SlotVariableReference>,
     }
+    /// Nested message and enum types in `TrackableObject`.
     pub mod trackable_object {
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct ObjectReference {
@@ -1419,7 +1433,7 @@ pub mod trackable_object_graph {
             pub node_id: i32,
             /// A user-provided name for the edge.
             #[prost(string, tag = "2")]
-            pub local_name: std::string::String,
+            pub local_name: ::prost::alloc::string::String,
         }
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct SerializedTensor {
@@ -1427,16 +1441,16 @@ pub mod trackable_object_graph {
             /// `SerializedTensor` named "VARIABLE_VALUE" by convention. This value may
             /// be restored on object creation as an optimization.
             #[prost(string, tag = "1")]
-            pub name: std::string::String,
+            pub name: ::prost::alloc::string::String,
             /// The full name of the variable/tensor, if applicable. Used to allow
             /// name-based loading of checkpoints which were saved using an
             /// object-based API. Should match the checkpoint key which would have been
             /// assigned by tf.train.Saver.
             #[prost(string, tag = "2")]
-            pub full_name: std::string::String,
+            pub full_name: ::prost::alloc::string::String,
             /// The generated name of the Tensor in the checkpoint.
             #[prost(string, tag = "3")]
-            pub checkpoint_key: std::string::String,
+            pub checkpoint_key: ::prost::alloc::string::String,
             /// Whether checkpoints should be considered as matching even without this
             /// value restored. Used for non-critical values which don't affect the
             /// TensorFlow graph, such as layer configurations.
@@ -1451,7 +1465,7 @@ pub mod trackable_object_graph {
             pub original_variable_node_id: i32,
             /// The name of the slot (e.g. "m"/"v").
             #[prost(string, tag = "2")]
-            pub slot_name: std::string::String,
+            pub slot_name: ::prost::alloc::string::String,
             /// An index into `TrackableObjectGraph.nodes`, indicating the
             /// `Object` with the value of the slot variable.
             #[prost(int32, tag = "3")]
@@ -1475,11 +1489,12 @@ pub struct SavedObjectGraph {
     /// The position of the object in this list indicates its id.
     /// Nodes[0] is considered the root node.
     #[prost(message, repeated, tag = "1")]
-    pub nodes: ::std::vec::Vec<SavedObject>,
+    pub nodes: ::prost::alloc::vec::Vec<SavedObject>,
     /// Information about captures and output structures in concrete functions.
     /// Referenced from SavedBareConcreteFunction and SavedFunction.
     #[prost(map = "string, message", tag = "2")]
-    pub concrete_functions: ::std::collections::HashMap<std::string::String, SavedConcreteFunction>,
+    pub concrete_functions:
+        ::std::collections::HashMap<::prost::alloc::string::String, SavedConcreteFunction>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SavedObject {
@@ -1488,7 +1503,8 @@ pub struct SavedObject {
     ///
     /// Note: currently only valid if kind == "user_object".
     #[prost(message, repeated, tag = "1")]
-    pub children: ::std::vec::Vec<trackable_object_graph::trackable_object::ObjectReference>,
+    pub children:
+        ::prost::alloc::vec::Vec<trackable_object_graph::trackable_object::ObjectReference>,
     /// Slot variables owned by this object. This describes the three-way
     /// (optimizer, variable, slot variable) relationship; none of the three
     /// depend on the others directly.
@@ -1496,12 +1512,14 @@ pub struct SavedObject {
     /// Note: currently only valid if kind == "user_object".
     #[prost(message, repeated, tag = "3")]
     pub slot_variables:
-        ::std::vec::Vec<trackable_object_graph::trackable_object::SlotVariableReference>,
+        ::prost::alloc::vec::Vec<trackable_object_graph::trackable_object::SlotVariableReference>,
     #[prost(map = "string, message", tag = "11")]
-    pub saveable_objects: ::std::collections::HashMap<std::string::String, SaveableObject>,
+    pub saveable_objects:
+        ::std::collections::HashMap<::prost::alloc::string::String, SaveableObject>,
     #[prost(oneof = "saved_object::Kind", tags = "4, 5, 6, 7, 8, 9, 10")]
-    pub kind: ::std::option::Option<saved_object::Kind>,
+    pub kind: ::core::option::Option<saved_object::Kind>,
 }
+/// Nested message and enum types in `SavedObject`.
 pub mod saved_object {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
@@ -1531,13 +1549,13 @@ pub mod saved_object {
 pub struct SavedUserObject {
     /// Corresponds to a registration of the type to use in the loading program.
     #[prost(string, tag = "1")]
-    pub identifier: std::string::String,
+    pub identifier: ::prost::alloc::string::String,
     /// Version information from the producer of this SavedUserObject.
     #[prost(message, optional, tag = "2")]
-    pub version: ::std::option::Option<VersionDef>,
+    pub version: ::core::option::Option<VersionDef>,
     /// Initialization-related metadata.
     #[prost(string, tag = "3")]
-    pub metadata: std::string::String,
+    pub metadata: ::prost::alloc::string::String,
 }
 /// A SavedAsset points to an asset in the MetaGraph.
 ///
@@ -1557,9 +1575,9 @@ pub struct SavedAsset {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SavedFunction {
     #[prost(string, repeated, tag = "1")]
-    pub concrete_functions: ::std::vec::Vec<std::string::String>,
+    pub concrete_functions: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "2")]
-    pub function_spec: ::std::option::Option<FunctionSpec>,
+    pub function_spec: ::core::option::Option<FunctionSpec>,
 }
 /// Stores low-level information about a concrete function. Referenced in either
 /// a SavedFunction or a SavedBareConcreteFunction.
@@ -1570,25 +1588,25 @@ pub struct SavedConcreteFunction {
     /// The only types of SavedObjects valid here are SavedVariable, SavedResource
     /// and SavedAsset.
     #[prost(int32, repeated, tag = "2")]
-    pub bound_inputs: ::std::vec::Vec<i32>,
+    pub bound_inputs: ::prost::alloc::vec::Vec<i32>,
     /// Input in canonicalized form that was received to create this concrete
     /// function.
     #[prost(message, optional, tag = "3")]
-    pub canonicalized_input_signature: ::std::option::Option<StructuredValue>,
+    pub canonicalized_input_signature: ::core::option::Option<StructuredValue>,
     /// Output that was the return value of this function after replacing all
     /// Tensors with TensorSpecs. This can be an arbitrary nested function and will
     /// be used to reconstruct the full structure from pure tensors.
     #[prost(message, optional, tag = "4")]
-    pub output_signature: ::std::option::Option<StructuredValue>,
+    pub output_signature: ::core::option::Option<StructuredValue>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SavedBareConcreteFunction {
     /// Identifies a SavedConcreteFunction.
     #[prost(string, tag = "1")]
-    pub concrete_function_name: std::string::String,
+    pub concrete_function_name: ::prost::alloc::string::String,
     /// A sequence of unique strings, one per Tensor argument.
     #[prost(string, repeated, tag = "2")]
-    pub argument_keywords: ::std::vec::Vec<std::string::String>,
+    pub argument_keywords: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The prefix of `argument_keywords` which may be identified by position.
     #[prost(int64, tag = "3")]
     pub allowed_positional_arguments: i64,
@@ -1597,7 +1615,7 @@ pub struct SavedBareConcreteFunction {
 pub struct SavedConstant {
     /// An Operation name for a ConstantOp in this SavedObjectGraph's MetaGraph.
     #[prost(string, tag = "1")]
-    pub operation: std::string::String,
+    pub operation: ::prost::alloc::string::String,
 }
 /// Represents a Variable that is initialized by loading the contents from the
 /// checkpoint.
@@ -1606,7 +1624,7 @@ pub struct SavedVariable {
     #[prost(enumeration = "DataType", tag = "1")]
     pub dtype: i32,
     #[prost(message, optional, tag = "2")]
-    pub shape: ::std::option::Option<TensorShapeProto>,
+    pub shape: ::core::option::Option<TensorShapeProto>,
     #[prost(bool, tag = "3")]
     pub trainable: bool,
     #[prost(enumeration = "VariableSynchronization", tag = "4")]
@@ -1614,7 +1632,7 @@ pub struct SavedVariable {
     #[prost(enumeration = "VariableAggregation", tag = "5")]
     pub aggregation: i32,
     #[prost(string, tag = "6")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
 }
 /// Represents `FunctionSpec` used in `Function`. This represents a
 /// function that has been wrapped as a TensorFlow `Function`.
@@ -1622,13 +1640,13 @@ pub struct SavedVariable {
 pub struct FunctionSpec {
     /// Full arg spec from inspect.getfullargspec().
     #[prost(message, optional, tag = "1")]
-    pub fullargspec: ::std::option::Option<StructuredValue>,
+    pub fullargspec: ::core::option::Option<StructuredValue>,
     /// Whether this represents a class method.
     #[prost(bool, tag = "2")]
     pub is_method: bool,
     /// The input signature, if specified.
     #[prost(message, optional, tag = "5")]
-    pub input_signature: ::std::option::Option<StructuredValue>,
+    pub input_signature: ::core::option::Option<StructuredValue>,
 }
 /// A SavedResource represents a TF object that holds state during its lifetime.
 /// An object of this type can have a reference to a:
@@ -1639,7 +1657,7 @@ pub struct SavedResource {
     /// creation function, e.g. "CPU". An empty string allows the user to select a
     /// device.
     #[prost(string, tag = "1")]
-    pub device: std::string::String,
+    pub device: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SaveableObject {
@@ -1655,13 +1673,13 @@ pub struct SaverDef {
     /// The name of the tensor in which to specify the filename when saving or
     /// restoring a model checkpoint.
     #[prost(string, tag = "1")]
-    pub filename_tensor_name: std::string::String,
+    pub filename_tensor_name: ::prost::alloc::string::String,
     /// The operation to run when saving a model checkpoint.
     #[prost(string, tag = "2")]
-    pub save_tensor_name: std::string::String,
+    pub save_tensor_name: ::prost::alloc::string::String,
     /// The operation to run when restoring a model checkpoint.
     #[prost(string, tag = "3")]
-    pub restore_op_name: std::string::String,
+    pub restore_op_name: ::prost::alloc::string::String,
     /// Maximum number of checkpoints to keep.  If 0, no checkpoints are deleted.
     #[prost(int32, tag = "4")]
     pub max_to_keep: i32,
@@ -1677,6 +1695,7 @@ pub struct SaverDef {
     #[prost(enumeration = "saver_def::CheckpointFormatVersion", tag = "7")]
     pub version: i32,
 }
+/// Nested message and enum types in `SaverDef`.
 pub mod saver_def {
     /// A version number that identifies a different on-disk checkpoint format.
     /// Usually, each subclass of BaseSaverBuilder works with a particular
@@ -1710,28 +1729,29 @@ pub mod saver_def {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetaGraphDef {
     #[prost(message, optional, tag = "1")]
-    pub meta_info_def: ::std::option::Option<meta_graph_def::MetaInfoDef>,
+    pub meta_info_def: ::core::option::Option<meta_graph_def::MetaInfoDef>,
     /// GraphDef.
     #[prost(message, optional, tag = "2")]
-    pub graph_def: ::std::option::Option<GraphDef>,
+    pub graph_def: ::core::option::Option<GraphDef>,
     /// SaverDef.
     #[prost(message, optional, tag = "3")]
-    pub saver_def: ::std::option::Option<SaverDef>,
+    pub saver_def: ::core::option::Option<SaverDef>,
     /// collection_def: Map from collection name to collections.
     /// See CollectionDef section for details.
     #[prost(map = "string, message", tag = "4")]
-    pub collection_def: ::std::collections::HashMap<std::string::String, CollectionDef>,
+    pub collection_def: ::std::collections::HashMap<::prost::alloc::string::String, CollectionDef>,
     /// signature_def: Map from user supplied key for a signature to a single
     /// SignatureDef.
     #[prost(map = "string, message", tag = "5")]
-    pub signature_def: ::std::collections::HashMap<std::string::String, SignatureDef>,
+    pub signature_def: ::std::collections::HashMap<::prost::alloc::string::String, SignatureDef>,
     /// Asset file def to be used with the defined graph.
     #[prost(message, repeated, tag = "6")]
-    pub asset_file_def: ::std::vec::Vec<AssetFileDef>,
+    pub asset_file_def: ::prost::alloc::vec::Vec<AssetFileDef>,
     /// Extra information about the structure of functions and stateful objects.
     #[prost(message, optional, tag = "7")]
-    pub object_graph_def: ::std::option::Option<SavedObjectGraph>,
+    pub object_graph_def: ::core::option::Option<SavedObjectGraph>,
 }
+/// Nested message and enum types in `MetaGraphDef`.
 pub mod meta_graph_def {
     /// Meta information regarding the graph to be exported.  To be used by users
     /// of this protocol buffer to encode information regarding their meta graph.
@@ -1740,15 +1760,15 @@ pub mod meta_graph_def {
         /// User specified Version string. Can be the name of the model and revision,
         /// steps this model has been trained to, etc.
         #[prost(string, tag = "1")]
-        pub meta_graph_version: std::string::String,
+        pub meta_graph_version: ::prost::alloc::string::String,
         /// A copy of the OpDefs used by the producer of this graph_def.
         /// Descriptions and Ops not used in graph_def are stripped out.
         #[prost(message, optional, tag = "2")]
-        pub stripped_op_list: ::std::option::Option<super::OpList>,
+        pub stripped_op_list: ::core::option::Option<super::OpList>,
         /// A serialized protobuf. Can be the time this meta graph is created, or
         /// modified, or name of the model.
         #[prost(message, optional, tag = "3")]
-        pub any_info: ::std::option::Option<::prost_types::Any>,
+        pub any_info: ::core::option::Option<::prost_types::Any>,
         /// User supplied tag(s) on the meta_graph and included graph_def.
         ///
         /// MetaGraphDefs should be tagged with their capabilities or use-cases.
@@ -1756,24 +1776,27 @@ pub mod meta_graph_def {
         /// These tags enable loaders to access the MetaGraph(s) appropriate for a
         /// specific use-case or runtime environment.
         #[prost(string, repeated, tag = "4")]
-        pub tags: ::std::vec::Vec<std::string::String>,
+        pub tags: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         /// The __version__ string of the tensorflow build used to write this graph.
         /// This will be populated by the framework, which will overwrite any user
         /// supplied value.
         #[prost(string, tag = "5")]
-        pub tensorflow_version: std::string::String,
+        pub tensorflow_version: ::prost::alloc::string::String,
         /// The __git_version__ string of the tensorflow build used to write this
         /// graph. This will be populated by the framework, which will overwrite any
         /// user supplied value.
         #[prost(string, tag = "6")]
-        pub tensorflow_git_version: std::string::String,
+        pub tensorflow_git_version: ::prost::alloc::string::String,
         /// A flag to denote whether default-valued attrs have been stripped from
         /// the nodes in this graph_def.
         #[prost(bool, tag = "7")]
         pub stripped_default_attrs: bool,
         /// FunctionDef name to aliases mapping.
         #[prost(map = "string, string", tag = "8")]
-        pub function_aliases: ::std::collections::HashMap<std::string::String, std::string::String>,
+        pub function_aliases: ::std::collections::HashMap<
+            ::prost::alloc::string::String,
+            ::prost::alloc::string::String,
+        >,
     }
 }
 /// CollectionDef should cover most collections.
@@ -1841,8 +1864,9 @@ pub mod meta_graph_def {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CollectionDef {
     #[prost(oneof = "collection_def::Kind", tags = "1, 2, 3, 4, 5")]
-    pub kind: ::std::option::Option<collection_def::Kind>,
+    pub kind: ::core::option::Option<collection_def::Kind>,
 }
+/// Nested message and enum types in `CollectionDef`.
 pub mod collection_def {
     /// NodeList is used for collecting nodes in graph. For example
     /// collection_def {
@@ -1857,7 +1881,7 @@ pub mod collection_def {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct NodeList {
         #[prost(string, repeated, tag = "1")]
-        pub value: ::std::vec::Vec<std::string::String>,
+        pub value: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
     /// BytesList is used for collecting strings and serialized protobufs. For
     /// example:
@@ -1874,26 +1898,26 @@ pub mod collection_def {
     /// }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct BytesList {
-        #[prost(bytes, repeated, tag = "1")]
-        pub value: ::std::vec::Vec<std::vec::Vec<u8>>,
+        #[prost(bytes = "vec", repeated, tag = "1")]
+        pub value: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
     }
     /// Int64List is used for collecting int, int64 and long values.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Int64List {
         #[prost(int64, repeated, tag = "1")]
-        pub value: ::std::vec::Vec<i64>,
+        pub value: ::prost::alloc::vec::Vec<i64>,
     }
     /// FloatList is used for collecting float values.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FloatList {
         #[prost(float, repeated, tag = "1")]
-        pub value: ::std::vec::Vec<f32>,
+        pub value: ::prost::alloc::vec::Vec<f32>,
     }
     /// AnyList is used for collecting Any protos.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct AnyList {
         #[prost(message, repeated, tag = "1")]
-        pub value: ::std::vec::Vec<::prost_types::Any>,
+        pub value: ::prost::alloc::vec::Vec<::prost_types::Any>,
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
@@ -1918,10 +1942,11 @@ pub struct TensorInfo {
     /// be known in advance.  In the case of a SparseTensor, this field describes
     /// the logical shape of the represented tensor (aka dense_shape).
     #[prost(message, optional, tag = "3")]
-    pub tensor_shape: ::std::option::Option<TensorShapeProto>,
+    pub tensor_shape: ::core::option::Option<TensorShapeProto>,
     #[prost(oneof = "tensor_info::Encoding", tags = "1, 4, 5")]
-    pub encoding: ::std::option::Option<tensor_info::Encoding>,
+    pub encoding: ::core::option::Option<tensor_info::Encoding>,
 }
+/// Nested message and enum types in `TensorInfo`.
 pub mod tensor_info {
     /// For sparse tensors, The COO encoding stores a triple of values, indices,
     /// and shape.
@@ -1930,30 +1955,30 @@ pub mod tensor_info {
         /// The shape of the values Tensor is [?].  Its dtype must be the dtype of
         /// the SparseTensor as a whole, given in the enclosing TensorInfo.
         #[prost(string, tag = "1")]
-        pub values_tensor_name: std::string::String,
+        pub values_tensor_name: ::prost::alloc::string::String,
         /// The indices Tensor must have dtype int64 and shape [?, ?].
         #[prost(string, tag = "2")]
-        pub indices_tensor_name: std::string::String,
+        pub indices_tensor_name: ::prost::alloc::string::String,
         /// The dynamic logical shape represented by the SparseTensor is recorded in
         /// the Tensor referenced here.  It must have dtype int64 and shape [?].
         #[prost(string, tag = "3")]
-        pub dense_shape_tensor_name: std::string::String,
+        pub dense_shape_tensor_name: ::prost::alloc::string::String,
     }
     /// Generic encoding for composite tensors.
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CompositeTensor {
         /// The serialized TypeSpec for the composite tensor.
         #[prost(message, optional, tag = "1")]
-        pub type_spec: ::std::option::Option<super::TypeSpecProto>,
+        pub type_spec: ::core::option::Option<super::TypeSpecProto>,
         /// A TensorInfo for each flattened component tensor.
         #[prost(message, repeated, tag = "2")]
-        pub components: ::std::vec::Vec<super::TensorInfo>,
+        pub components: ::prost::alloc::vec::Vec<super::TensorInfo>,
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Encoding {
         /// For dense `Tensor`s, the name of the tensor in the graph.
         #[prost(string, tag = "1")]
-        Name(std::string::String),
+        Name(::prost::alloc::string::String),
         /// There are many possible encodings of sparse matrices
         /// (https://en.wikipedia.org/wiki/Sparse_matrix).  Currently, TensorFlow
         /// uses only the COO encoding.  This is supported and documented in the
@@ -2026,10 +2051,10 @@ pub mod tensor_info {
 pub struct SignatureDef {
     /// Named input parameters.
     #[prost(map = "string, message", tag = "1")]
-    pub inputs: ::std::collections::HashMap<std::string::String, TensorInfo>,
+    pub inputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorInfo>,
     /// Named output parameters.
     #[prost(map = "string, message", tag = "2")]
-    pub outputs: ::std::collections::HashMap<std::string::String, TensorInfo>,
+    pub outputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorInfo>,
     /// Extensible method_name information enabling third-party users to mark a
     /// SignatureDef as supporting a particular method. This enables producers and
     /// consumers of SignatureDefs, e.g. a model definition library and a serving
@@ -2039,7 +2064,7 @@ pub struct SignatureDef {
     /// method_name. This is commonly used to support multi-headed computation,
     /// where a single graph computation may return multiple results.
     #[prost(string, tag = "3")]
-    pub method_name: std::string::String,
+    pub method_name: ::prost::alloc::string::String,
 }
 /// An asset file def for a single file or a set of sharded files with the same
 /// name.
@@ -2047,10 +2072,10 @@ pub struct SignatureDef {
 pub struct AssetFileDef {
     /// The tensor to bind the asset filename to.
     #[prost(message, optional, tag = "1")]
-    pub tensor_info: ::std::option::Option<TensorInfo>,
+    pub tensor_info: ::core::option::Option<TensorInfo>,
     /// The filename within an assets directory. Note: does not include the path
     /// prefix, i.e. directories. For an asset at /tmp/path/vocab.txt, the filename
     /// would be "vocab.txt".
     #[prost(string, tag = "2")]
-    pub filename: std::string::String,
+    pub filename: ::prost::alloc::string::String,
 }
