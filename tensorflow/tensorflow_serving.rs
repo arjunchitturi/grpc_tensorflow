@@ -2022,7 +2022,7 @@ pub struct AssetFileDef {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExampleList {
     #[prost(message, repeated, tag = "1")]
-    pub examples: ::std::vec::Vec<Example>,
+    pub examples: ::prost::alloc::vec::Vec<Example>,
 }
 /// Specifies one or more independent input Examples, with a common context
 /// Example.
@@ -2080,15 +2080,16 @@ pub struct ExampleList {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExampleListWithContext {
     #[prost(message, repeated, tag = "1")]
-    pub examples: ::std::vec::Vec<Example>,
+    pub examples: ::prost::alloc::vec::Vec<Example>,
     #[prost(message, optional, tag = "2")]
-    pub context: ::std::option::Option<Example>,
+    pub context: ::core::option::Option<Example>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Input {
     #[prost(oneof = "input::Kind", tags = "1, 2")]
-    pub kind: ::std::option::Option<input::Kind>,
+    pub kind: ::core::option::Option<input::Kind>,
 }
+/// Nested message and enum types in `Input`.
 pub mod input {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
@@ -2103,11 +2104,11 @@ pub mod input {
 pub struct ModelSpec {
     /// Required servable name.
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     /// A named signature to evaluate. If unspecified, the default signature will
     /// be used.
     #[prost(string, tag = "3")]
-    pub signature_name: std::string::String,
+    pub signature_name: ::prost::alloc::string::String,
     /// Optional choice of which version of the model to use.
     ///
     /// Recommended to be left unset in the common case. Should be specified only
@@ -2118,8 +2119,9 @@ pub struct ModelSpec {
     /// notably when serving on a fleet of instances, may be either the previous or
     /// new version.
     #[prost(oneof = "model_spec::VersionChoice", tags = "2, 4")]
-    pub version_choice: ::std::option::Option<model_spec::VersionChoice>,
+    pub version_choice: ::core::option::Option<model_spec::VersionChoice>,
 }
+/// Nested message and enum types in `ModelSpec`.
 pub mod model_spec {
     /// Optional choice of which version of the model to use.
     ///
@@ -2137,7 +2139,7 @@ pub mod model_spec {
         Version(i64),
         /// Use the version associated with the given label.
         #[prost(string, tag = "4")]
-        VersionLabel(std::string::String),
+        VersionLabel(::prost::alloc::string::String),
     }
 }
 /// A single class.
@@ -2145,7 +2147,7 @@ pub mod model_spec {
 pub struct Class {
     /// Label or name of the class.
     #[prost(string, tag = "1")]
-    pub label: std::string::String,
+    pub label: ::prost::alloc::string::String,
     /// Score for this class (e.g., the probability the item belongs to this
     /// class). As per the proto3 default-value semantics, if the score is missing,
     /// it should be treated as 0.
@@ -2156,14 +2158,14 @@ pub struct Class {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Classifications {
     #[prost(message, repeated, tag = "1")]
-    pub classes: ::std::vec::Vec<Class>,
+    pub classes: ::prost::alloc::vec::Vec<Class>,
 }
 /// Contains one result per input example, in the same order as the input in
 /// ClassificationRequest.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClassificationResult {
     #[prost(message, repeated, tag = "1")]
-    pub classifications: ::std::vec::Vec<Classifications>,
+    pub classifications: ::prost::alloc::vec::Vec<Classifications>,
 }
 // RPC Interfaces
 
@@ -2172,46 +2174,46 @@ pub struct ClassificationRequest {
     /// Model Specification. If version is not specified, will use the latest
     /// (numerical) version.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Input data.
     #[prost(message, optional, tag = "2")]
-    pub input: ::std::option::Option<Input>,
+    pub input: ::core::option::Option<Input>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClassificationResponse {
     /// Effective Model Specification used for classification.
     #[prost(message, optional, tag = "2")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Result of the classification.
     #[prost(message, optional, tag = "1")]
-    pub result: ::std::option::Option<ClassificationResult>,
+    pub result: ::core::option::Option<ClassificationResult>,
 }
 /// Message returned for "signature_def" field.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignatureDefMap {
     #[prost(map = "string, message", tag = "1")]
-    pub signature_def: ::std::collections::HashMap<std::string::String, SignatureDef>,
+    pub signature_def: ::std::collections::HashMap<::prost::alloc::string::String, SignatureDef>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetModelMetadataRequest {
     /// Model Specification indicating which model we are querying for metadata.
     /// If version is not specified, will use the latest (numerical) version.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Metadata fields to get. Currently supported: "signature_def".
     #[prost(string, repeated, tag = "2")]
-    pub metadata_field: ::std::vec::Vec<std::string::String>,
+    pub metadata_field: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetModelMetadataResponse {
     /// Model Specification indicating which model this metadata belongs to.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Map of metadata field name to metadata field. The options for metadata
     /// field name are listed in GetModelMetadataRequest. Currently supported:
     /// "signature_def".
     #[prost(map = "string, message", tag = "2")]
-    pub metadata: ::std::collections::HashMap<std::string::String, ::prost_types::Any>,
+    pub metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Any>,
 }
 /// Regression result for a single item (tensorflow.Example).
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2224,7 +2226,7 @@ pub struct Regression {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegressionResult {
     #[prost(message, repeated, tag = "1")]
-    pub regressions: ::std::vec::Vec<Regression>,
+    pub regressions: ::prost::alloc::vec::Vec<Regression>,
 }
 // RPC interfaces.
 
@@ -2233,18 +2235,18 @@ pub struct RegressionRequest {
     /// Model Specification. If version is not specified, will use the latest
     /// (numerical) version.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Input data.
     #[prost(message, optional, tag = "2")]
-    pub input: ::std::option::Option<Input>,
+    pub input: ::core::option::Option<Input>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RegressionResponse {
     /// Effective Model Specification used for regression.
     #[prost(message, optional, tag = "2")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     #[prost(message, optional, tag = "1")]
-    pub result: ::std::option::Option<RegressionResult>,
+    pub result: ::core::option::Option<RegressionResult>,
 }
 /// Inference request such as classification, regression, etc...
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2253,21 +2255,22 @@ pub struct InferenceTask {
     /// (numerical) version.
     /// All ModelSpecs in a MultiInferenceRequest must access the same model name.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Signature's method_name. Should be one of the method names defined in
     /// third_party/tensorflow/python/saved_model/signature_constants.py.
     /// e.g. "tensorflow/serving/classify".
     #[prost(string, tag = "2")]
-    pub method_name: std::string::String,
+    pub method_name: ::prost::alloc::string::String,
 }
 /// Inference result, matches the type of request or is an error.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InferenceResult {
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     #[prost(oneof = "inference_result::Result", tags = "2, 3")]
-    pub result: ::std::option::Option<inference_result::Result>,
+    pub result: ::core::option::Option<inference_result::Result>,
 }
+/// Nested message and enum types in `InferenceResult`.
 pub mod inference_result {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
@@ -2282,10 +2285,10 @@ pub mod inference_result {
 pub struct MultiInferenceRequest {
     /// Inference tasks.
     #[prost(message, repeated, tag = "1")]
-    pub tasks: ::std::vec::Vec<InferenceTask>,
+    pub tasks: ::prost::alloc::vec::Vec<InferenceTask>,
     /// Input data.
     #[prost(message, optional, tag = "2")]
-    pub input: ::std::option::Option<Input>,
+    pub input: ::core::option::Option<Input>,
 }
 /// Inference request containing one or more responses.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2293,7 +2296,7 @@ pub struct MultiInferenceResponse {
     /// List of results; one for each InferenceTask in the request, returned in the
     /// same order as the request.
     #[prost(message, repeated, tag = "1")]
-    pub results: ::std::vec::Vec<InferenceResult>,
+    pub results: ::prost::alloc::vec::Vec<InferenceResult>,
 }
 /// PredictRequest specifies which TensorFlow model to run, as well as
 /// how inputs are mapped to tensors and how outputs are filtered before
@@ -2303,13 +2306,13 @@ pub struct PredictRequest {
     /// Model Specification. If version is not specified, will use the latest
     /// (numerical) version.
     #[prost(message, optional, tag = "1")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Input tensors.
     /// Names of input tensor are alias names. The mapping from aliases to real
     /// input tensor names is stored in the SavedModel export as a prediction
     /// SignatureDef under the 'inputs' field.
     #[prost(map = "string, message", tag = "2")]
-    pub inputs: ::std::collections::HashMap<std::string::String, TensorProto>,
+    pub inputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorProto>,
     /// Output filter.
     /// Names specified are alias names. The mapping from aliases to real output
     /// tensor names is stored in the SavedModel export as a prediction
@@ -2318,17 +2321,17 @@ pub struct PredictRequest {
     /// exception that when none is specified, all tensors specified in the
     /// named signature will be run/fetched and returned.
     #[prost(string, repeated, tag = "3")]
-    pub output_filter: ::std::vec::Vec<std::string::String>,
+    pub output_filter: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Response for PredictRequest on successful run.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PredictResponse {
     /// Effective Model Specification used to process PredictRequest.
     #[prost(message, optional, tag = "2")]
-    pub model_spec: ::std::option::Option<ModelSpec>,
+    pub model_spec: ::core::option::Option<ModelSpec>,
     /// Output tensors.
     #[prost(map = "string, message", tag = "1")]
-    pub outputs: ::std::collections::HashMap<std::string::String, TensorProto>,
+    pub outputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorProto>,
 }
 #[doc = r" Generated client implementations."]
 pub mod prediction_service_client {
