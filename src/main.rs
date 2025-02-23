@@ -1,9 +1,12 @@
-use rand::distributions::{Distribution, Uniform};
+use rand::distr::{Distribution, Uniform};
 use std::collections::HashMap;
 use tensorflowlib::{
     model_spec, prediction_service_client::PredictionServiceClient, tensor_shape_proto::Dim,
     ModelSpec, PredictRequest, PredictResponse, TensorProto, TensorShapeProto,
 };
+
+const ENDPOINT: &str = "http://0.0.0.0:8500";
+
 
 fn prepare_request(
     shape: (i64, i64, i64),
@@ -15,9 +18,9 @@ fn prepare_request(
     let mut all_tensors: Vec<u8> = vec![];
 
     // fetch some random floats in the range 0..10.
-    let step = Uniform::new(0.0, 10.0);
+    let step = Uniform::new(0.0, 10.0).unwrap();
     let input_vec: Vec<f32> = step
-        .sample_iter(&mut rand::thread_rng())
+        .sample_iter(&mut rand::rng())
         .take(shape.0 as usize)
         .collect();
 
@@ -47,6 +50,7 @@ fn prepare_request(
         version_number: 0i32,
         tensor_content: all_tensors,
         float_val: vec![0f32],
+        ..Default::default()
     };
     inputs.insert("x".to_string(), tensor);
     tonic::Request::new(PredictRequest {
@@ -57,6 +61,7 @@ fn prepare_request(
         }),
         inputs: inputs,
         output_filter: vec!["y".to_string()],
+        ..Default::default()
     })
 }
 
@@ -66,7 +71,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (service_name, signature_name, version) = ("half_plus_two", "serving_default", 123);
     let request: tonic::Request<PredictRequest> =
         prepare_request(input_shape, service_name, signature_name, version);
-    let channel = tonic::transport::Channel::from_static("http://0.0.0.0:8500")
+    let channel = tonic::transport::Channel::from_static(ENDPOINT)
         .connect()
         .await?;
     let mut client = PredictionServiceClient::new(channel);
