@@ -1,12 +1,11 @@
 use rand::distr::{Distribution, Uniform};
 use std::collections::HashMap;
 use tensorflowlib::{
-    model_spec, prediction_service_client::PredictionServiceClient, tensor_shape_proto::Dim,
-    ModelSpec, PredictRequest, PredictResponse, TensorProto, TensorShapeProto,
+    ModelSpec, PredictRequest, PredictResponse, TensorProto, TensorShapeProto, model_spec,
+    prediction_service_client::PredictionServiceClient, tensor_shape_proto::Dim,
 };
 
 const ENDPOINT: &str = "http://0.0.0.0:8500";
-
 
 fn prepare_request(
     shape: (i64, i64, i64),

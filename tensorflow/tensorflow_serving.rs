@@ -59,10 +59,7 @@ pub struct FeatureList {
 pub struct FeatureLists {
     /// Map from feature name to feature list.
     #[prost(map = "string, message", tag = "1")]
-    pub feature_list: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        FeatureList,
-    >,
+    pub feature_list: ::std::collections::HashMap<::prost::alloc::string::String, FeatureList>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Example {
@@ -361,9 +358,7 @@ pub struct ResourceHandleProto {
     pub maybe_type_name: ::prost::alloc::string::String,
     /// Data types and shapes for the underlying resource.
     #[prost(message, repeated, tag = "6")]
-    pub dtypes_and_shapes: ::prost::alloc::vec::Vec<
-        resource_handle_proto::DtypeAndShape,
-    >,
+    pub dtypes_and_shapes: ::prost::alloc::vec::Vec<resource_handle_proto::DtypeAndShape>,
 }
 /// Nested message and enum types in `ResourceHandleProto`.
 pub mod resource_handle_proto {
@@ -1020,9 +1015,7 @@ pub mod op_def {
         pub type_list_attr: ::prost::alloc::string::String,
         /// The handle data for resource inputs.
         #[prost(message, repeated, tag = "7")]
-        pub handle_data: ::prost::alloc::vec::Vec<
-            super::resource_handle_proto::DtypeAndShape,
-        >,
+        pub handle_data: ::prost::alloc::vec::Vec<super::resource_handle_proto::DtypeAndShape>,
         /// For inputs: if true, the inputs are required to be refs.
         ///    By default, inputs can be either refs or non-refs.
         /// For outputs: if true, outputs are refs, otherwise they are not.
@@ -1169,9 +1162,7 @@ pub mod node_def {
         /// be {A, B}. This information can be used to map errors originating at the
         /// current node to some top level source code.
         #[prost(string, repeated, tag = "1")]
-        pub original_node_names: ::prost::alloc::vec::Vec<
-            ::prost::alloc::string::String,
-        >,
+        pub original_node_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
         /// This is intended to store the list of names of the functions from the
         /// original graph that this node was derived. For example if this node, say
         /// C, was result of a fusion of node A in function FA and node B in function
@@ -1180,9 +1171,7 @@ pub mod node_def {
         /// `original_node_names` can be used to map errors originating at the
         /// current ndoe to some top level source code.
         #[prost(string, repeated, tag = "2")]
-        pub original_func_names: ::prost::alloc::vec::Vec<
-            ::prost::alloc::string::String,
-        >,
+        pub original_func_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
 }
 /// A library is a set of named functions.
@@ -1231,17 +1220,13 @@ pub struct FunctionDef {
     /// A mapping from the output arg names from `signature` to the
     /// outputs from `node_def` that should be returned by the function.
     #[prost(map = "string, string", tag = "4")]
-    pub ret: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub ret:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
     /// A mapping from control output names from `signature` to node names in
     /// `node_def` which should be control outputs of this function.
     #[prost(map = "string, string", tag = "6")]
-    pub control_ret: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost::alloc::string::String,
-    >,
+    pub control_ret:
+        ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
 }
 /// Nested message and enum types in `FunctionDef`.
 pub mod function_def {
@@ -1250,10 +1235,7 @@ pub mod function_def {
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ArgAttrs {
         #[prost(map = "string, message", tag = "1")]
-        pub attr: ::std::collections::HashMap<
-            ::prost::alloc::string::String,
-            super::AttrValue,
-        >,
+        pub attr: ::std::collections::HashMap<::prost::alloc::string::String, super::AttrValue>,
     }
 }
 /// GradientDef defines the gradient function of a function defined in
@@ -1310,10 +1292,8 @@ pub struct GraphDebugInfo {
     pub traces_by_id: ::std::collections::HashMap<u64, graph_debug_info::StackTrace>,
     /// Deprecated.
     #[prost(map = "string, message", tag = "2")]
-    pub traces: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        graph_debug_info::StackTrace,
-    >,
+    pub traces:
+        ::std::collections::HashMap<::prost::alloc::string::String, graph_debug_info::StackTrace>,
     /// This maps a node name to a trace id contained in `traces_by_id`.
     ///
     /// The map key is a mangling of the containing function and op name with
@@ -1327,10 +1307,7 @@ pub struct GraphDebugInfo {
     /// It would be preferable to avoid mangling and use a tuple key of (op.name,
     /// func_name), but this is not supported with protocol buffers.
     #[prost(map = "string, fixed64", tag = "5")]
-    pub name_to_trace_id: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        u64,
-    >,
+    pub name_to_trace_id: ::std::collections::HashMap<::prost::alloc::string::String, u64>,
 }
 /// Nested message and enum types in `GraphDebugInfo`.
 pub mod graph_debug_info {
@@ -1681,10 +1658,7 @@ pub struct TupleValue {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DictValue {
     #[prost(map = "string, message", tag = "1")]
-    pub fields: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        StructuredValue,
-    >,
+    pub fields: ::std::collections::HashMap<::prost::alloc::string::String, StructuredValue>,
 }
 /// Represents a (key, value) pair.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1750,17 +1724,7 @@ pub struct TypeSpecProto {
 }
 /// Nested message and enum types in `TypeSpecProto`.
 pub mod type_spec_proto {
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum TypeSpecClass {
         Unknown = 0,
@@ -1849,9 +1813,7 @@ pub mod trackable_object_graph {
         pub attributes: ::prost::alloc::vec::Vec<trackable_object::SerializedTensor>,
         /// Slot variables owned by this object.
         #[prost(message, repeated, tag = "3")]
-        pub slot_variables: ::prost::alloc::vec::Vec<
-            trackable_object::SlotVariableReference,
-        >,
+        pub slot_variables: ::prost::alloc::vec::Vec<trackable_object::SlotVariableReference>,
         /// The registered saver used to save this object. If this saver is not
         /// present when loading the checkpoint, then loading will fail.
         #[prost(message, optional, tag = "4")]
@@ -1928,10 +1890,8 @@ pub struct SavedObjectGraph {
     /// Information about captures and output structures in concrete functions.
     /// Referenced from SavedBareConcreteFunction and SavedFunction.
     #[prost(map = "string, message", tag = "2")]
-    pub concrete_functions: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        SavedConcreteFunction,
-    >,
+    pub concrete_functions:
+        ::std::collections::HashMap<::prost::alloc::string::String, SavedConcreteFunction>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SavedObject {
@@ -1941,34 +1901,29 @@ pub struct SavedObject {
     /// Note: All kinds of SavedObject may have children, except
     /// "constant" and "captured_tensor".
     #[prost(message, repeated, tag = "1")]
-    pub children: ::prost::alloc::vec::Vec<
-        trackable_object_graph::trackable_object::ObjectReference,
-    >,
+    pub children:
+        ::prost::alloc::vec::Vec<trackable_object_graph::trackable_object::ObjectReference>,
     /// Ordered list of dependencies that must be loaded before this object.
     /// SavedModel loads with the bottom-up approach, by first creating all objects
     /// (in the order defined by the dependencies), then connecting the edges.
     #[prost(message, repeated, tag = "15")]
-    pub dependencies: ::prost::alloc::vec::Vec<
-        trackable_object_graph::trackable_object::ObjectReference,
-    >,
+    pub dependencies:
+        ::prost::alloc::vec::Vec<trackable_object_graph::trackable_object::ObjectReference>,
     /// Slot variables owned by this object. This describes the three-way
     /// (optimizer, variable, slot variable) relationship; none of the three
     /// depend on the others directly.
     ///
     /// Note: currently only valid if kind == "user_object".
     #[prost(message, repeated, tag = "3")]
-    pub slot_variables: ::prost::alloc::vec::Vec<
-        trackable_object_graph::trackable_object::SlotVariableReference,
-    >,
+    pub slot_variables:
+        ::prost::alloc::vec::Vec<trackable_object_graph::trackable_object::SlotVariableReference>,
     /// Stores the functions used to save and restore this object. At most one of
     /// `saveable_objects` or `registered_saver` is defined for each SavedObject.
     /// See the comment below for the difference between SaveableObject and
     /// registered savers.
     #[prost(map = "string, message", tag = "11")]
-    pub saveable_objects: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        SaveableObject,
-    >,
+    pub saveable_objects:
+        ::std::collections::HashMap<::prost::alloc::string::String, SaveableObject>,
     /// The name of the registered class of the form "{package}.{class_name}".
     /// This field is used to search for the registered class at loading time.
     #[prost(string, tag = "13")]
@@ -2128,9 +2083,7 @@ pub struct SavedVariable {
     ///
     /// This is only supported by experimental loaders at the moment.
     #[prost(message, repeated, tag = "8")]
-    pub experimental_distributed_variable_components: ::prost::alloc::vec::Vec<
-        SavedVariable,
-    >,
+    pub experimental_distributed_variable_components: ::prost::alloc::vec::Vec<SavedVariable>,
 }
 /// Represents `FunctionSpec` used in `Function`. This represents a
 /// function that has been wrapped as a TensorFlow `Function`.
@@ -2158,17 +2111,7 @@ pub mod function_spec {
     /// field, so we instead map to an enum.
     ///
     /// See `tf.function` for details.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum JitCompile {
         Default = 0,
@@ -2252,17 +2195,7 @@ pub mod saver_def {
     /// Usually, each subclass of BaseSaverBuilder works with a particular
     /// version/format.  However, it is possible that the same builder may be
     /// upgraded to support a newer checkpoint format in the future.
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum CheckpointFormatVersion {
         /// Internal legacy format.
@@ -2319,17 +2252,11 @@ pub struct MetaGraphDef {
     /// collection_def: Map from collection name to collections.
     /// See CollectionDef section for details.
     #[prost(map = "string, message", tag = "4")]
-    pub collection_def: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        CollectionDef,
-    >,
+    pub collection_def: ::std::collections::HashMap<::prost::alloc::string::String, CollectionDef>,
     /// signature_def: Map from user supplied key for a signature to a single
     /// SignatureDef.
     #[prost(map = "string, message", tag = "5")]
-    pub signature_def: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        SignatureDef,
-    >,
+    pub signature_def: ::std::collections::HashMap<::prost::alloc::string::String, SignatureDef>,
     /// Asset file def to be used with the defined graph.
     #[prost(message, repeated, tag = "6")]
     pub asset_file_def: ::prost::alloc::vec::Vec<AssetFileDef>,
@@ -2653,10 +2580,7 @@ pub struct SignatureDef {
     pub method_name: ::prost::alloc::string::String,
     /// Named input to corresponding default values if any.
     #[prost(map = "string, message", tag = "4")]
-    pub defaults: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        TensorProto,
-    >,
+    pub defaults: ::std::collections::HashMap<::prost::alloc::string::String, TensorProto>,
 }
 /// An asset file def for a single file or a set of sharded files with the same
 /// name.
@@ -2847,10 +2771,7 @@ pub struct PredictRequest {
     /// input tensor names is stored in the SavedModel export as a prediction
     /// SignatureDef under the 'inputs' field.
     #[prost(map = "string, message", tag = "2")]
-    pub inputs: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        TensorProto,
-    >,
+    pub inputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorProto>,
     /// Output filter.
     /// Names specified are alias names. The mapping from aliases to real output
     /// tensor names is stored in the SavedModel export as a prediction
@@ -2883,7 +2804,11 @@ pub mod predict_request {
         /// Servers can use this to optimize placement, caching and colocation.
         #[prost(bytes = "vec", optional, tag = "1")]
         pub client_id: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
-        #[prost(enumeration = "request_options::DeterministicMode", optional, tag = "2")]
+        #[prost(
+            enumeration = "request_options::DeterministicMode",
+            optional,
+            tag = "2"
+        )]
         pub deterministic_mode: ::core::option::Option<i32>,
     }
     /// Nested message and enum types in `RequestOptions`.
@@ -2891,15 +2816,7 @@ pub mod predict_request {
         /// Deterministic mode for the request. When specified, model servers will
         /// reduce numeric instability based on different mode selections.
         #[derive(
-            Clone,
-            Copy,
-            Debug,
-            PartialEq,
-            Eq,
-            Hash,
-            PartialOrd,
-            Ord,
-            ::prost::Enumeration
+            Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration,
         )]
         #[repr(i32)]
         pub enum DeterministicMode {
@@ -3007,24 +2924,11 @@ pub struct PredictStreamedOptions {
     /// input tensors for request 1 should be \[[1, 2\], \[5, 6]\] and request 2 should
     /// be \[[3, 4\], \[7, 8]\].
     #[prost(map = "string, int32", tag = "2")]
-    pub split_dimensions: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        i32,
-    >,
+    pub split_dimensions: ::std::collections::HashMap<::prost::alloc::string::String, i32>,
 }
 /// Nested message and enum types in `PredictStreamedOptions`.
 pub mod predict_streamed_options {
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum RequestState {
         None = 0,
@@ -3062,10 +2966,7 @@ pub struct PredictResponse {
     pub model_spec: ::core::option::Option<ModelSpec>,
     /// Output tensors.
     #[prost(map = "string, message", tag = "1")]
-    pub outputs: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        TensorProto,
-    >,
+    pub outputs: ::std::collections::HashMap<::prost::alloc::string::String, TensorProto>,
 }
 /// A single class.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3115,10 +3016,7 @@ pub struct ClassificationResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignatureDefMap {
     #[prost(map = "string, message", tag = "1")]
-    pub signature_def: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        SignatureDef,
-    >,
+    pub signature_def: ::std::collections::HashMap<::prost::alloc::string::String, SignatureDef>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetModelMetadataRequest {
@@ -3139,10 +3037,7 @@ pub struct GetModelMetadataResponse {
     /// field name are listed in GetModelMetadataRequest. Currently supported:
     /// "signature_def".
     #[prost(map = "string, message", tag = "2")]
-    pub metadata: ::std::collections::HashMap<
-        ::prost::alloc::string::String,
-        ::prost_types::Any,
-    >,
+    pub metadata: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Any>,
 }
 /// Inference request such as classification, regression, etc...
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3201,10 +3096,10 @@ pub mod prediction_service_client {
         dead_code,
         missing_docs,
         clippy::wildcard_imports,
-        clippy::let_unit_value,
+        clippy::let_unit_value
     )]
-    use tonic::codegen::*;
     use tonic::codegen::http::Uri;
+    use tonic::codegen::*;
     /// open source marker; do not remove
     /// PredictionService provides access to machine-learned models loaded by
     /// model_servers.
@@ -3246,14 +3141,13 @@ pub mod prediction_service_client {
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
             T: tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-                Response = http::Response<
-                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    http::Request<tonic::body::BoxBody>,
+                    Response = http::Response<
+                        <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                    >,
                 >,
-            >,
-            <T as tonic::codegen::Service<
-                http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
+            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             PredictionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -3292,141 +3186,99 @@ pub mod prediction_service_client {
         pub async fn classify(
             &mut self,
             request: impl tonic::IntoRequest<super::ClassificationRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ClassificationResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::ClassificationResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/tensorflow.serving.PredictionService/Classify",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("tensorflow.serving.PredictionService", "Classify"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "tensorflow.serving.PredictionService",
+                "Classify",
+            ));
             self.inner.unary(req, path, codec).await
         }
         /// Regress.
         pub async fn regress(
             &mut self,
             request: impl tonic::IntoRequest<super::RegressionRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::RegressionResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::RegressionResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/tensorflow.serving.PredictionService/Regress",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("tensorflow.serving.PredictionService", "Regress"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "tensorflow.serving.PredictionService",
+                "Regress",
+            ));
             self.inner.unary(req, path, codec).await
         }
         /// Predict -- provides access to loaded TensorFlow model.
         pub async fn predict(
             &mut self,
             request: impl tonic::IntoRequest<super::PredictRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::PredictResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::PredictResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/tensorflow.serving.PredictionService/Predict",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("tensorflow.serving.PredictionService", "Predict"),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "tensorflow.serving.PredictionService",
+                "Predict",
+            ));
             self.inner.unary(req, path, codec).await
         }
         /// MultiInference API for multi-headed models.
         pub async fn multi_inference(
             &mut self,
             request: impl tonic::IntoRequest<super::MultiInferenceRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::MultiInferenceResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::MultiInferenceResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/tensorflow.serving.PredictionService/MultiInference",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "tensorflow.serving.PredictionService",
-                        "MultiInference",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "tensorflow.serving.PredictionService",
+                "MultiInference",
+            ));
             self.inner.unary(req, path, codec).await
         }
         /// GetModelMetadata - provides access to metadata for loaded models.
         pub async fn get_model_metadata(
             &mut self,
             request: impl tonic::IntoRequest<super::GetModelMetadataRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetModelMetadataResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
+        ) -> std::result::Result<tonic::Response<super::GetModelMetadataResponse>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::unknown(format!("Service was not ready: {}", e.into()))
+            })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/tensorflow.serving.PredictionService/GetModelMetadata",
             );
             let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "tensorflow.serving.PredictionService",
-                        "GetModelMetadata",
-                    ),
-                );
+            req.extensions_mut().insert(GrpcMethod::new(
+                "tensorflow.serving.PredictionService",
+                "GetModelMetadata",
+            ));
             self.inner.unary(req, path, codec).await
         }
     }
